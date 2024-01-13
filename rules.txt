@@ -1,0 +1,24 @@
+Rules 
+
+  Gameplay
+    Random player is selected to be dealer using number gen. 
+    Whoever wins book gets first play next round 
+    Players in play in turn to the left 
+    Cards are placed face up
+  
+  Bot
+    Plays any card of the selected suit
+    Else plays trump
+    Else first valid card
+  
+  General Rules
+    4 players each 13 cards
+    13 cards are viewable playable cards in a hand
+    Ace high, 2’s low
+    Player must throw selected suit, can discard, can throw trump card.
+      Sidenote: Dont have to write code for ties
+    Highest card wins book, unless trump card is played (spades)
+    If 2 players a trump the higher trump card wins
+  
+  How to Win
+    Player win most books wins, Ties between players will be listed as such
