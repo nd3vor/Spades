@@ -1,0 +1,52 @@
+Game Design Document
+Card Game Creation:
+
+Objective/Goal: Create a High Card vs. Low Card game that we build to a web server that other players can access on the web
+
+Front End/UI
+  Player Icons
+  Card Sprites
+    Images from the internet OR artist creation
+
+  Scripts/Code
+    Javascript
+    Node.js
+
+  Server Creation
+    AWS
+    Github Pages
+    Heroku
+    Needs to be playable
+      Do not need a DNS hostname
+    Add multiplayer function into the game
+      Other players can join
+        Lobby code?
+        Random Matchmaking?
+      How many servers are going to play host?
+        How many players per server/lobby?
+        Can you rejoin after disconnection?
+
+  Rules
+    Follow the rules of Spades
+      Each player receives 13 cards
+        Start from dealer’s left and go in a clockwise motion
+      Player to the dealer’s left starts first
+        Players get choice of which card they would like to be played
+      Each player in turn will pick a card to play
+        Aces are high, 2s are low
+        Highest played card wins the hand
+    Scorekeeping for each player
+      Incrementation
+      Players will gain a point per round won
+    What happens if one player leaves (IMPLEMENT LATER)
+      Create a bot player to play against the user(s)
+      Skip the absent player’s turn
+    Users/Players Goals and Expectations
+      Functioning game
+      Looks pretty
+
+Role Delegation:
+    UI:
+    Scripting:
+    QA:
+    Networking/Servers:
