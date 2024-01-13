@@ -7,7 +7,7 @@
         <title>Card Game</title>
         <script type="module">
 
-            const values2 = {
+            const values = {
                 "d 2" : 2,
                 "d 3" : 3,
                 "d 4" : 4,
@@ -61,6 +61,17 @@
                 "s K" : 26,
                 "s A" : 27,
             }
+
+            let deck = Object.keys(values).map(function (key) {
+                return [Number(key), obj[key]];
+            });
+
+            for (let i = 0; i < deck.length; i++) {
+                for (let z = 0; z < deck[i].length; z++) {
+                    console.log(deck[i][z]);
+                }
+            }
+
             function Deal() {
                 for (let i = 0; i < deck.cards.length / 4; i++) {
                     p1Deck[i] = deck.cards[i];
