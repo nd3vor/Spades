@@ -6,99 +6,99 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Card Game</title>
         <script type="module">
+            document.getElementById("prepButton").addEventListener("click", Shuffle);
+            //document.getElementById("playButton").addEventListener("click", Play);
 
-            const values = {
-                "d 2" : 2,
-                "d 3" : 3,
-                "d 4" : 4,
-                "d 5" : 5,
-                "d 6" : 6,
-                "d 7" : 7,
-                "d 8" : 8,
-                "d 9" : 9,
-                "d 10" : 10,
-                "d j" : 11,
-                "d q" : 12,
-                "d k" : 13,
-                "d a" : 14,
-                "h 3" : 3,
-                "h 2" : 2,
-                "h 4" : 4,
-                "h 5" : 5,
-                "h 6" : 6,
-                "h 7" : 7,
-                "h 8" : 8,
-                "h 9" : 9,
-                "h 10" : 10,
-                "h j" : 11,
-                "h q" : 12,
-                "h k" : 13,
-                "h a" : 14,
-                "c 2" : 2,
-                "c 3" : 3,
-                "c 4" : 4,
-                "c 5" : 5,
-                "c 6" : 6,
-                "c 7" : 7,
-                "c 8" : 8,
-                "c 9" : 9,
-                "c 10" : 10,
-                "c j" : 11,
-                "c q" : 12,
-                "c k" : 13,
-                "c a" : 14,
-                "s 2" : 15,
-                "s 3" : 16,
-                "s 4" : 17,
-                "s 5" : 18,
-                "s 6" : 19,
-                "s 7" : 20,
-                "s 8" : 21,
-                "s 9" : 22,
-                "s 10" : 23,
-                "s j" : 24,
-                "s q" : 25,
-                "s k" : 26,
-                "s a" : 27,
-            }
+            const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
+            const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
 
-            let deck = Object.keys(values).map(function (key) {
-                return [Number(key), obj[key]];
-            });
+            const p1Deck = [];
+            const p2Deck = [];
+            const p3Deck = [];
+            const p4Deck = [];
 
-            for (let i = 0; i < deck.length; i++) {
-                for (let z = 0; z < deck[i].length; z++) {
-                    console.log(deck[i][z]);
+            let p1Score = 0;
+            let p2Score = 0;
+            let p3Score = 0;
+            let p4Score = 0;
+            let playCount = 0;
+
+            class Deck {
+                constructor(cards = createDeck()) {
+                    this.cards = cards;
                 }
             }
 
+            class Card {
+                constructor(suit, value) {
+                    this.suit = suit;
+                    this.value = value;
+                }
+            }
+
+            function createDeck() {
+                return suits.flatMap(suit => {
+                    return values.map(value => {
+                        return new Card(suit, value);
+                    });
+                });
+            }
+
+            const deck = new Deck();
+
+            function Shuffle() {
+                for (let i = deck.cards.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    const X = deck.cards[i];
+                    deck.cards[i] = deck.cards[j];
+                    deck.cards[j] = X;
+                }
+                console.log(deck);
+                Deal();
+            }
+
+            //Dealer distributes a deck of cards to 4 players
             function Deal() {
                 for (let i = 0; i < deck.cards.length / 4; i++) {
                     p1Deck[i] = deck.cards[i];
                 }
-                // for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
-                //     p2Deck[i] = deck.cards[i];
-                // }
-                // for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
-                //     p3Deck[i] = deck.cards[i];
-                // }
-                // for (let i = ((deck.cards.lenth / 2) + deck.cards.length / 4); i < deck.cards.length; i++) {
-                //     p4Deck[i] = deck.cards[i];
-                // }
-                for (let i = 26; i < deck.cards.length; i++) {
+                for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
                     p2Deck[i] = deck.cards[i];
                 }
+                for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
+                    p3Deck[i] = deck.cards[i];
+                }
+                for (let i = ((deck.cards.length / 2) + (deck.cards.length / 4)); i < deck.cards.length; i++) {
+                    p4Deck[i] = deck.cards[i];
+                }
+
+                console.log(p1Deck);
+                console.log(p2Deck);
+                console.log(p3Deck);
+                console.log(p4Deck);
 
                 return p1Deck;
                 return p2Deck;
-                // return p3Deck;
-                // return p4Deck;
+                return p3Deck;
+                return p4Deck;
             }
+
+            //Ability to select a card
+
+            //Value comparisons
+
+            //Discard "pile"/Trash collection
         
+            //Can only play same suit as lead card + conditions
+
+            //Lead player cannot play spade unless a spade has been played previously in the game
+
+            //Scorekeeping
+
+            //Game Over/End Game
         </script>
     </head>
     <body id="paste">
         <button id="prepButton">Shuffle/Deal</button>
-        <button id="playButton">Play Game</button>
     </body>
 </html>
