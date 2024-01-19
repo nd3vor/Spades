@@ -47,6 +47,8 @@
             const deck = new Deck();
 
             function Shuffle() {
+                //Rearrange order of the cards (Random)
+                //Rearrange order of entire deck, not suit by suit
                 for (let i = deck.cards.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
                     const X = deck.cards[i];
@@ -85,7 +87,41 @@
 
             //Ability to select a card
 
+            //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives
+
             //Value comparisons
+                //Sets - JavaScript
+                    //Uniqueness
+                    //Not Order dependent
+                //Plays a card
+                    //Choose a card from the cards that you have (your "hand": also a set)
+                        //(set = set - 1)
+                    //Place chosen card on the table (container for the set of 4 cards)
+                        //Insert cards played into table set
+                        //Of table set, determine highest card
+                        //Table set becomes book, which belongs to the player that played the highest card
+                //Card needs to be worth more than the other cards (higher value)
+                //When someone has highest valued card, that is called a "book"
+                //"Book" - Take all 4 cards (set of cards) and you played the highest card of them
+                    //Create an ARRAY OF SETS of cards for multiple wins
+                    //Winner has the most sets in the end -- End of game loop (win condition)
+                //Data Structure? Does the code have a method already?
+
+                //Functions
+                    //Shuffle
+                    //Winners
+                    //Playing a card
+                    //Taking a book
+                    //Determine a book
+
+                //Data Structures
+                    //Sets
+                        //BOOK - Set of 4 Cards
+                        //HAND - Set of card in hand (13 cards)
+                        //TABLE - Set of cards that each player played from their hand
+                    //Arrays
+                    //"Play"
+                        //Remove card from HAND set and play onto TABLE set
 
             //Discard "pile"/Trash collection
         
