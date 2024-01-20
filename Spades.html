@@ -87,7 +87,7 @@
 
             //Ability to select a card
 
-            //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives
+            //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives----------------------------------------------------------------------------------------------------
 
             //Value comparisons
                 //Sets - JavaScript
@@ -114,6 +114,25 @@
                     //Taking a book = Store your books won into an array of books / NATE
                     //Determine a book = comparing values and determining highest card / PETER
 
+            testFunction();
+            
+            function testFunction() {
+                let tableSet = [12, 5, 62, 10, 43];
+
+                createBook(tableSet);
+            }
+
+            function createBook(tableSet /*the set of cards on the table*/) {
+                let highestCard = tableSet[0];
+                for (let i = 0; i < tableSet.length; i++) {
+                    if (tableSet[i] > highestCard) {
+                        highestCard = tableSet[i];
+                    }
+                }
+                console.log(highestCard);
+                return highestCard;
+            }
+
                 //Data Structures
                     //Sets
                         //BOOK - Set of 4 Cards
@@ -122,6 +141,8 @@
                     //Arrays
                     //"Play"
                         //Remove card from HAND set and play onto TABLE set
+
+                //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
             //Discard "pile"/Trash collection
         
