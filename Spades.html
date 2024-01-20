@@ -8,6 +8,10 @@
         <script type="module">
             document.getElementById("prepButton").addEventListener("click", Shuffle);
             //document.getElementById("playButton").addEventListener("click", Play);
+            document.getElementById("determinePlayer1").addEventListener("click", determinePlayer1);
+            document.getElementById("determinePlayer2").addEventListener("click", determinePlayer2);
+            document.getElementById("determinePlayer3").addEventListener("click", determinePlayer3);
+            document.getElementById("determinePlayer4").addEventListener("click", determinePlayer4);
 
             const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
             const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
@@ -16,12 +20,49 @@
             const p2Deck = [];
             const p3Deck = [];
             const p4Deck = [];
+            let playerDeck = [];
 
             let p1Score = 0;
             let p2Score = 0;
             let p3Score = 0;
             let p4Score = 0;
             let playCount = 0;
+
+            function determinePlayer1() {
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                playerDeck = p1Deck;
+            }
+
+            function determinePlayer2() {
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                playerDeck = p2Deck;
+            }
+
+            function determinePlayer3() {
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                playerDeck = p3Deck;
+            }
+
+            function determinePlayer4() {
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                playerDeck = p4Deck;
+            }
 
             class Deck {
                 constructor(cards = createDeck()) {
@@ -78,6 +119,7 @@
                 console.log(p2Deck);
                 console.log(p3Deck);
                 console.log(p4Deck);
+                console.log(playerDeck);
 
                 return p1Deck;
                 return p2Deck;
@@ -150,9 +192,21 @@
             //Can only play same suit as lead card + conditions
 
             //Lead player cannot play first spade of game
+            function toggleElement(id, toggle) {
+                let element = document.getElementById(id);
+                let display = (toggle) ? 'block' : 'none';
+                element.style.display = display;
+            }
+
         </script>
     </head>
     <body id="paste">
-        <button id="prepButton">Shuffle/Deal</button>
+        <div id="start-screen" class="screen" style="display:block">
+            <button id="determinePlayer1">Player 1</button>
+            <button id="determinePlayer2">Player 2</button>
+            <button id="determinePlayer3">Player 3</button>
+            <button id="determinePlayer4">Player 4</button>
+        </div>
+        <button id="prepButton" style="display:none">Shuffle/Deal</button>
     </body>
 </html>
