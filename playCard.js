@@ -20,9 +20,6 @@ function currentPlayerTurn() {
 }
 
 function playCard(playerHand) {
-    // TODO: Check if the input is valid
-    // TODO: Make sure the input value is not outside of the range (0-12)
-
     // Is the player's hand empty?
     if (playerHand.size === 0) {
         console.log("Out of Cards");
@@ -37,14 +34,18 @@ function playCard(playerHand) {
         console.log(`${i}: ${card.value} of ${card.suit}`);
     }
 
-    // Continue to prompt the user until valid input is received
+    // Continuosly to prompt the user until valid input is received
+    // We can change this later when a bot is implemented
     while (true) {
         const cardIndexPrompt = prompt(`Player ${currentPlayer}, enter the index of the card to play: `);
         const cardIndex = parseInt(cardIndexPrompt);
 
         if (cardIndex >= 0 && cardIndex < playerHand.length) {
-            const cardPlayed = playerHand.splice(cardIndex, 1)[0]; // Remove the card
-            book.push(cardPlayed); // Add the card to the book array
+            // Remove the card from the player's hand
+            const cardPlayed = playerHand.splice(cardIndex, 1)[0];
+            // Add the card played to the book array
+            book.push(cardPlayed);
+            // Log the action to the console
             console.log(`Player ${currentPlayer} played ${cardPlayed.value} of ${cardPlayed.suit}`);
             break;
         }
