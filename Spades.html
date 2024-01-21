@@ -85,6 +85,23 @@
                 return p4Deck;
             }
 
+            function takeBook(index){
+                switch(index){
+                    case 0:
+                        p1.books = p1.books +1;
+                        break;
+                    case 1:
+                        p2.books = p2.books +1;
+                        break;
+                    case 2:
+                        p3.books = p3.books +1;
+                        break;
+                    case 3:
+                        p4.books = p4.books +1;
+                        break; 
+                }
+            }
+
             //Ability to select a card
 
             //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives
