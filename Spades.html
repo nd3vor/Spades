@@ -16,11 +16,11 @@
             const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
             const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
 
-            const p1Deck = [];
-            const p2Deck = [];
-            const p3Deck = [];
-            const p4Deck = [];
-            let playerDeck = [];
+            const p1Hand = [];
+            const p2Hand = [];
+            const p3Hand = [];
+            const p4Hand = [];
+            let playerHand = [];
 
             let p1Score = 0;
             let p2Score = 0;
@@ -34,7 +34,7 @@
                 toggleElement('determinePlayer3', false);
                 toggleElement('determinePlayer4', false);
                 toggleElement('prepButton', true);
-                playerDeck = p1Deck;
+                playerHand = p1Hand;
             }
 
             function determinePlayer2() {
@@ -43,7 +43,7 @@
                 toggleElement('determinePlayer3', false);
                 toggleElement('determinePlayer4', false);
                 toggleElement('prepButton', true);
-                playerDeck = p2Deck;
+                playerHand = p2Hand;
             }
 
             function determinePlayer3() {
@@ -52,7 +52,7 @@
                 toggleElement('determinePlayer3', false);
                 toggleElement('determinePlayer4', false);
                 toggleElement('prepButton', true);
-                playerDeck = p3Deck;
+                playerHand = p3Hand;
             }
 
             function determinePlayer4() {
@@ -61,7 +61,7 @@
                 toggleElement('determinePlayer3', false);
                 toggleElement('determinePlayer4', false);
                 toggleElement('prepButton', true);
-                playerDeck = p4Deck;
+                playerHand = p4Hand;
             }
 
             class Deck {
@@ -104,28 +104,28 @@
             function Deal() {
                 
                 for (let i = 0; i < deck.cards.length / 4; i++) {
-                    p1Deck[i] = deck.cards[i];
+                    p1Hand[i] = deck.cards[i];
                 }
                 for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
-                    p2Deck[i] = deck.cards[i];
+                    p2Hand[i] = deck.cards[i];
                 }
                 for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
-                    p3Deck[i] = deck.cards[i];
+                    p3Hand[i] = deck.cards[i];
                 }
                 for (let i = ((deck.cards.length / 2) + (deck.cards.length / 4)); i < deck.cards.length; i++) {
-                    p4Deck[i] = deck.cards[i];
+                    p4Hand[i] = deck.cards[i];
                 }
 
-                console.log(p1Deck);
-                console.log(p2Deck);
-                console.log(p3Deck);
-                console.log(p4Deck);
-                console.log(playerDeck);
+                console.log(p1Hand);
+                console.log(p2Hand);
+                console.log(p3Hand);
+                console.log(p4Hand);
+                console.log(playerHand);
 
-                return p1Deck;
-                return p2Deck;
-                return p3Deck;
-                return p4Deck;
+                return p1Hand;
+                return p2Hand;
+                return p3Hand;
+                return p4Hand;
             }
 
             //Ability to select a card
@@ -157,25 +157,30 @@
                     //Taking a book = Store your books won into an array of books / NATE
                     //Determine a book = comparing values and determining highest card / PETER
 
+                //When the players each play a card, we can determine the highest value of each card. That only determines the winning card, not the winning player
+
             //---------------------------------------------------------------------------------------------------------
             //THIS FUNCTION WILL BE THE PICKING A CARD FUNCTION
             testFunction();
             
             function testFunction() {
-                let tableSet = [12, 5, 62, 10, 43];
+                let tableSet = [72, 5, 62, 10, 43];
 
                 createBook(tableSet);
             }
 
             function createBook(tableSet /*the set of cards on the table*/) {
-                let highestCard = tableSet[0];
+                let highestCard = 0;
+                let index = 0;
                 for (let i = 0; i < tableSet.length; i++) {
                     if (tableSet[i] > highestCard) {
                         highestCard = tableSet[i];
+                        index = i;
                     }
                 }
                 console.log(highestCard);
-                return highestCard;
+                console.log(index);
+                return index;
             }
             //----------------------------------------------------------------------------------------------------------
 
