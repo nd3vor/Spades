@@ -28,6 +28,8 @@
             let p4Score = 0;
             let playCount = 0;
 
+            let currentPlayer = 0;
+
             function determinePlayer1() {
                 toggleElement('determinePlayer1', false);
                 toggleElement('determinePlayer2', false);
@@ -36,6 +38,7 @@
                 toggleElement('prepButton', true);
                 toggleElement('playCardButton', true);
                 playerHand = p1Hand;
+                currentPlayer = 1;
             }
 
             function determinePlayer2() {
@@ -46,6 +49,7 @@
                 toggleElement('prepButton', true);
                 toggleElement('playCardButton', true);
                 playerHand = p2Hand;
+                currentPlayer = 2;
             }
 
             function determinePlayer3() {
@@ -56,6 +60,7 @@
                 toggleElement('prepButton', true);
                 toggleElement('playCardButton', true);
                 playerHand = p3Hand;
+                currentPlayer = 3;
             }
 
             function determinePlayer4() {
@@ -66,6 +71,7 @@
                 toggleElement('prepButton', true);
                 toggleElement('playCardButton', true);
                 playerHand = p4Hand;
+                currentPlayer = 4;
             }
 
             class Deck {
@@ -124,13 +130,11 @@
                 console.log(p2Hand);
                 console.log(p3Hand);
                 console.log(p4Hand);
-                console.log(playerHand);
 
                 return p1Hand;
                 return p2Hand;
                 return p3Hand;
                 return p4Hand;
-                return playerHand;
             }
 
             //Ability to select a card
@@ -167,14 +171,13 @@
             //---------------------------------------------------------------------------------------------------------
             //THIS FUNCTION WILL BE THE PICKING A CARD FUNCTION
             
-            const table = [];
-            //let playerDeck = [];
-            let currentPlayer = 1;
+            const table = [];   
 
             document.getElementById("playCardButton").addEventListener("click", currentPlayerTurn);
 
             function currentPlayerTurn() {
                 console.log(`Player ${currentPlayer}'s Turn`);
+                
                 playCard(playerHand);
 
                 playCount++;
@@ -182,6 +185,8 @@
                 if (playCount === 4) {
                     playCount = 0;
                     console.log("End of Round");
+                    console.log(table);
+                    createBook(table);
                 }
 
                 // Advance to the next player's turn
@@ -209,9 +214,6 @@
                     const cardIndexPrompt = prompt(`Player ${currentPlayer}, enter the index of the card to play: `);
                     const cardIndex = parseInt(cardIndexPrompt);
 
-                    console.log(cardIndex);
-                    console.log(playerHand.length);
-
                     if (cardIndex >= 0 && cardIndex < playerHand.length) {
                         // Remove the card from the player's hand
                         const cardPlayed = playerHand.splice(cardIndex, 1)[0];
@@ -219,6 +221,7 @@
                         table.push(cardPlayed);
                         // Log the action to the console
                         console.log(`Player ${currentPlayer} played ${cardPlayed.value} of ${cardPlayed.suit}`);
+
                         break;
                     }
 
@@ -227,20 +230,29 @@
             }
             
             function takeBook(index){
+                let p1Books = 0;
+                let p2Books = 0;
+                let p3Books = 0;
+                let p4Books = 0;
+                
                 switch(index){
                     case 0:
-                        p1.books = p1.books +1;
+                        p1Books++;
                         break;
                     case 1:
-                        p2.books = p2.books +1;
+                        p2Books++;
                         break;
                     case 2:
-                        p3.books = p3.books +1;
+                        p3Books++;
                         break;
                     case 3:
-                        p4.books = p4.books +1;
+                        p4Books++;
                         break; 
                 }
+                console.log("Player 1's Books: " + p1Books);
+                console.log("Player 2's Books: " + p2Books);
+                console.log("Player 3's Books: " + p3Books);
+                console.log("Player 4's Books: " + p4Books);
             }
 
             // testFunction();
@@ -252,19 +264,20 @@
             // }
 
             function createBook(tableSet /*the set of cards on the table*/) {
-                let highestCard = 0;
+                let highestCard = tableSet[0];
                 let index = 0;
 
                 for (let i = 0; i < tableSet.length; i++) {
-                    if (tableSet[i] > highestCard) {
+                    if (parseInt(tableSet[i].value, 16) > parseInt(highestCard.value, 16)) {
                         highestCard = tableSet[i];
                         index = i;
                     }
                 }
                 console.log(highestCard);
                 console.log(index);
-                return index;
                 takeBook(index);
+                return index;
+                
             }
             //----------------------------------------------------------------------------------------------------------
 
