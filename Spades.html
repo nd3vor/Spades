@@ -16,10 +16,10 @@
             const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
             const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
 
-            const p1Hand = [];
-            const p2Hand = [];
-            const p3Hand = [];
-            const p4Hand = [];
+            let p1Hand = [];
+            let p2Hand = [];
+            let p3Hand = [];
+            let p4Hand = [];
             let playerHand = [];
 
             let p1Score = 0;
@@ -111,19 +111,27 @@
             }
 
             //Dealer distributes a deck of cards to 4 players
-            function Deal() {
-                
+            function Deal() {              
                 for (let i = 0; i < deck.cards.length / 4; i++) {
                     p1Hand[i] = deck.cards[i];
                 }
                 for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
                     p2Hand[i] = deck.cards[i];
+                    p2Hand = p2Hand.filter(function (el) {
+                        return el != null;
+                    });
                 }
                 for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
                     p3Hand[i] = deck.cards[i];
+                    p3Hand = p3Hand.filter(function (el) {
+                        return el != null;
+                    });
                 }
                 for (let i = ((deck.cards.length / 2) + (deck.cards.length / 4)); i < deck.cards.length; i++) {
                     p4Hand[i] = deck.cards[i];
+                    p4Hand = p4Hand.filter(function (el) {
+                        return el != null;
+                    });
                 }
 
                 console.log(p1Hand);
