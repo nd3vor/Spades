@@ -22,11 +22,12 @@
             let p4Hand = [];
             let playerHand = [];
 
-            let p1Score = 0;
-            let p2Score = 0;
-            let p3Score = 0;
-            let p4Score = 0;
             let playCount = 0;
+
+            let p1Books = 0;
+            let p2Books = 0;
+            let p3Books = 0;
+            let p4Books = 0;
 
             let currentPlayer = 0;
 
@@ -179,13 +180,24 @@
             //---------------------------------------------------------------------------------------------------------
             //THIS FUNCTION WILL BE THE PICKING A CARD FUNCTION
             
-            const table = [];   
+            const table = [];  
 
             document.getElementById("playCardButton").addEventListener("click", currentPlayerTurn);
 
             function currentPlayerTurn() {
                 console.log(`Player ${currentPlayer}'s Turn`);
-                
+                if (currentPlayer === 1) {
+                    playerHand = p1Hand;
+                }
+                else if (currentPlayer === 2) {
+                    playerHand = p2Hand;
+                }
+                else if (currentPlayer === 3) {
+                    playerHand = p3Hand;
+                }
+                else if (currentPlayer === 4) {
+                    playerHand = p4Hand;
+                }
                 playCard(playerHand);
 
                 playCount++;
@@ -238,23 +250,22 @@
             }
             
             function takeBook(index){
-                let p1Books = 0;
-                let p2Books = 0;
-                let p3Books = 0;
-                let p4Books = 0;
-                
                 switch(index){
                     case 0:
-                        p1Books++;
+                        p1Books = p1Books + 1;
+                        table.splice(0, 4);
                         break;
                     case 1:
-                        p2Books++;
+                        p2Books = p2Books + 1;
+                        table.splice(0, 4);
                         break;
                     case 2:
-                        p3Books++;
+                        p3Books = p3Books + 1;
+                        table.splice(0, 4);
                         break;
                     case 3:
-                        p4Books++;
+                        p4Books = p4Books + 1;
+                        table.splice(0, 4);
                         break; 
                 }
                 console.log("Player 1's Books: " + p1Books);
