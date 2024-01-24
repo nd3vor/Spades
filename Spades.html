@@ -147,8 +147,6 @@
                 return p4Hand;
             }
 
-            //Ability to select a card
-
             //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives----------------------------------------------------------------------------------------------------
 
             //Value comparisons
@@ -204,10 +202,10 @@
                 playCount++;
 
                 if (playCount === 4) {
-                    playCount = 0;
-                    console.log("End of Round");
                     console.log(table);
                     createBook(table);
+                    playCount = 0;
+                    console.log("End of Round");
                 }
 
                 // Advance to the next player's turn
@@ -284,26 +282,19 @@
                 }
             }
 
-            // testFunction();
-            
-            // function testFunction() {
-            //     let tableSet = [72, 5, 62, 10, 43];
-
-            //     createBook(tableSet);
-            // }
-
             function createBook(tableSet /*the set of cards on the table*/) {
                 let highestCard = tableSet[0];
                 let index = 0;
 
                 for (let i = 0; i < tableSet.length; i++) {
+                    if (tableSet[i].suit === "Spades") {
+                    tableSet[i].value = tableSet[i].value + 13;
+                    }
                     if (parseInt(tableSet[i].value, 16) > parseInt(highestCard.value, 16)) {
                         highestCard = tableSet[i];
                         index = i;
                     }
                 }
-                console.log(highestCard);
-                console.log(index);
                 takeBook(index);
                 return index;
                 
@@ -360,12 +351,6 @@
                 }
                 return highScore;
             }
-
-                // let p1 = 2;
-                // let p2 = 4;
-                // let p3 = 4;
-                // let p4 = 3;
-                // console.log(Winners(p1,p2,p3,p4));
 
             //----------------------------------------------------------------------------------------------------------
 
