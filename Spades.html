@@ -33,45 +33,29 @@
             let currentPlayer = 0;
 
             function determinePlayer1() {
-                toggleElement('determinePlayer1', false);
-                toggleElement('determinePlayer2', false);
-                toggleElement('determinePlayer3', false);
-                toggleElement('determinePlayer4', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('start-screen', false);
+                toggleElement('play-screen', true);
                 playerHand = p1Hand;
                 currentPlayer = 1;
             }
 
             function determinePlayer2() {
-                toggleElement('determinePlayer1', false);
-                toggleElement('determinePlayer2', false);
-                toggleElement('determinePlayer3', false);
-                toggleElement('determinePlayer4', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('start-screen', false);
+                toggleElement('play-screen', true);
                 playerHand = p2Hand;
                 currentPlayer = 2;
             }
 
             function determinePlayer3() {
-                toggleElement('determinePlayer1', false);
-                toggleElement('determinePlayer2', false);
-                toggleElement('determinePlayer3', false);
-                toggleElement('determinePlayer4', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('start-screen', false);
+                toggleElement('play-screen', true);
                 playerHand = p3Hand;
                 currentPlayer = 3;
             }
 
             function determinePlayer4() {
-                toggleElement('determinePlayer1', false);
-                toggleElement('determinePlayer2', false);
-                toggleElement('determinePlayer3', false);
-                toggleElement('determinePlayer4', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('start-screen', false);
+                toggleElement('play-screen', true);
                 playerHand = p4Hand;
                 currentPlayer = 4;
             }
@@ -327,7 +311,7 @@
                     winningMessage += "The winnner is " + winners[0];	
                 else{
                     winningMessage += "It's a tie! The winners are";
-                    for(i=0; i<winners.length; i++) {
+                    for(let i = 0; i<winners.length; i++) {
                         winningMessage += " " + winners[i];
                     }
                 }
@@ -383,7 +367,9 @@
             <button id="determinePlayer3">Player 3</button>
             <button id="determinePlayer4">Player 4</button>
         </div>
-        <button id="prepButton" style="display:none">Shuffle/Deal</button>
-        <button id="playCardButton" style="display:none">Play Card</button>
+        <div id="play-screen" class="screen" style="display:none">
+            <button id="prepButton">Shuffle/Deal</button>
+            <button id="playCardButton">Play Card</button>
+        </div>
     </body>
 </html>
