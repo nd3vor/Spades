@@ -186,16 +186,9 @@
                 else if (currentPlayer === 4) {
                     playerHand = p4Hand;
                 }
-                playCard(playerHand);
+                createBook(table);
 
                 playCount++;
-
-                if (playCount === 4) {
-                    console.log(table);
-                    createBook(table);
-                    playCount = 0;
-                    console.log("End of Round");
-                }
 
                 // Advance to the next player's turn
                 currentPlayer = (currentPlayer % 4) + 1;
@@ -271,11 +264,18 @@
                 }
             }
 
-            function createBook(tableSet /*the set of cards on the table*/) {
+            async function createBook(tableSet /*the set of cards on the table*/) {
                 let highestCard = tableSet[0];
                 let index = 0;
 
-                for (let i = 0; i < tableSet.length; i++) {
+                await playCard(playerHand);
+
+                if (playCount === 4) {
+                    console.log(table);
+                    playCount = 0;
+                    console.log("End of Round");
+
+                    for (let i = 0; i < tableSet.length; i++) {
                     if (tableSet[i].suit === "Spades") {
                     tableSet[i].value = tableSet[i].value + 13;
                     }
@@ -283,10 +283,10 @@
                         highestCard = tableSet[i];
                         index = i;
                     }
-                }
-                takeBook(index);
-                return index;
-                
+                    }
+                    takeBook(index);
+                    return index;
+                }  
             }
 
             function Winners(p1Score, p2Score, p3Score, p4Score){
