@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head onunload>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Card Game</title>
-        <script type="module"> 
-            window.onbeforeunload = function () {
-                //If we include a "Play Again" feature, this can also be placed there in order to clear past game's data
-                localStorage.clear();
-            }
-
+        <script type="module">
             document.getElementById("prepButton").addEventListener("click", Shuffle);
             //document.getElementById("playButton").addEventListener("click", Play);
             document.getElementById("determinePlayer1").addEventListener("click", determinePlayer1);
@@ -21,46 +16,48 @@
             const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
             const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
 
-            let p1Hand = [];
-            let p2Hand = [];
-            let p3Hand = [];
-            let p4Hand = [];
-            let playerHand = [];
-
-            let playCount = 0;
-            let numberOfBooks = 0;
-
-            let p1Books = 0;
-            let p2Books = 0;
-            let p3Books = 0;
-            let p4Books = 0;
-
-            let currentPlayer = 0;
+            
 
             function determinePlayer1() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                toggleElement('playCardButton', true);
                 playerHand = p1Hand;
                 currentPlayer = 1;
             }
 
             function determinePlayer2() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                toggleElement('playCardButton', true);
                 playerHand = p2Hand;
                 currentPlayer = 2;
             }
 
             function determinePlayer3() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                toggleElement('playCardButton', true);
                 playerHand = p3Hand;
                 currentPlayer = 3;
             }
 
             function determinePlayer4() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
+                toggleElement('determinePlayer1', false);
+                toggleElement('determinePlayer2', false);
+                toggleElement('determinePlayer3', false);
+                toggleElement('determinePlayer4', false);
+                toggleElement('prepButton', true);
+                toggleElement('playCardButton', true);
                 playerHand = p4Hand;
                 currentPlayer = 4;
             }
@@ -86,9 +83,9 @@
                 });
             }
 
-            const deck = new Deck();
+            //const deck = new Deck();
 
-            function Shuffle() {
+            function Shuffle(deck) {
                 //Rearrange order of the cards (Random)
                 //Rearrange order of entire deck, not suit by suit
                 for (let i = deck.cards.length - 1; i > 0; i--) {
@@ -98,11 +95,10 @@
                     deck.cards[j] = X;
                 }
                 console.log(deck);
-                Deal();
             }
 
             //Dealer distributes a deck of cards to 4 players
-            function Deal() {              
+            function Deal(p1Hand, p2Hand, p3Hand, p4Hand) {              
                 for (let i = 0; i < deck.cards.length / 4; i++) {
                     p1Hand[i] = deck.cards[i];
                 }
@@ -124,16 +120,10 @@
                         return el != null;
                     });
                 }
-
                 console.log(p1Hand);
                 console.log(p2Hand);
                 console.log(p3Hand);
                 console.log(p4Hand);
-
-                return p1Hand;
-                return p2Hand;
-                return p3Hand;
-                return p4Hand;
             }
 
             //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives----------------------------------------------------------------------------------------------------
@@ -167,8 +157,7 @@
 
             //---------------------------------------------------------------------------------------------------------
             //THIS FUNCTION WILL BE THE PICKING A CARD FUNCTION
-            
-            const table = [];  
+              
 
             document.getElementById("playCardButton").addEventListener("click", currentPlayerTurn);
 
@@ -239,9 +228,8 @@
                 }
             }
             
-            function takeBook(index){
-                numberOfBooks++;
-                
+            function takeBook(index, numberOfBooks){
+                numberOfBooks++;           
                 switch(index){
                     case 0:
                         p1Books = p1Books + 1;
@@ -316,7 +304,7 @@
                     winningMessage += "The winnner is " + winners[0];	
                 else{
                     winningMessage += "It's a tie! The winners are";
-                    for(let i = 0; i<winners.length; i++) {
+                    for(i=0; i<winners.length; i++) {
                         winningMessage += " " + winners[i];
                     }
                 }
@@ -340,11 +328,45 @@
                 }
                 return highScore;
             }
-
-            function gCollect() {
-                table = null;
+            //player object takes the hand array as a default argument and books will be incremented on takebook call.
+            class Player{
+	            constructor(){
+	            this.hand = [];
+                this.books = 0;
+	            }
+            }
+            class Game{
+                constructor(){
+                    this.playCount = 0;
+                    this.numbOfBooks = 0;
+                    this.table = [];
+                    this.deck = Deck.Shuffle(new Deck());
+                }
+            }
+            // this is the game function each time we want to play a new game we can call this function.
+            function main(){
+                const newGame = new Game();
+                Shuffle(newGame.deck);
+                const Player1 = new Player();
+                const Player2 = new Player();
+                const Player3 = new Player();
+                const Player4 = new Player();
+                Deal(Player1.hand, Player2.hand, Player3.hand, Player4.hand);
             }
 
+
+            let currentPlayer = 0;
+                /* Main Function Layout
+                    Declare Variables for arguments
+                    Num of players and hands
+                    Shuffle
+                    Deal
+                    PlayCard
+                    Compare Values
+                    Take Book
+                    
+                */
+            
 
             //----------------------------------------------------------------------------------------------------------
 
@@ -377,9 +399,112 @@
             <button id="determinePlayer3">Player 3</button>
             <button id="determinePlayer4">Player 4</button>
         </div>
-        <div id="play-screen" class="screen" style="display:none">
-            <button id="prepButton">Shuffle/Deal</button>
-            <button id="playCardButton">Play Card</button>
-        </div>
+        <button id="prepButton" style="display:none">Shuffle/Deal</button>
+        <button id="playCardButton" style="display:none">Play Card</button>
     </body>
 </html>
+
+/* Main Function Layout
+encapsulate variables
+Declare Variables for arguments
+Num of players and hands
+Shuffle
+Deal
+PlayCard
+Compare Values
+Take Book       
+
+const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
+const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
+
+class Card {
+    constructor(suit, value) {
+        this.suit = suit;
+        this.value = value;
+    }
+}
+class Deck {
+    constructor(cards = this.createDeck()) {
+        this.cards = cards;
+    }
+
+    createDeck() {
+        return suits.flatMap(suit => {
+            return values.map(value => {
+            return new Card(suit, value);
+            });
+        });
+    }
+
+    Shuffle() {
+        //Rearrange order of the cards (Random)
+        //Rearrange order of entire deck, not suit by suit
+        for (let i = deck.cards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const X = deck.cards[i];
+            deck.cards[i] = deck.cards[j];
+            deck.cards[j] = X;
+        }
+        console.log(Deck);
+    }
+    
+    Deal(p1Hand, p2Hand, p3Hand, p4Hand) {              
+        for (let i = 0; i < deck.cards.length / 4; i++) {
+            p1Hand[i] = deck.cards[i];
+        }
+        for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
+            p2Hand[i] = deck.cards[i];
+            p2Hand = p2Hand.filter(function (el) {
+                return el != null;
+            });
+        }
+        for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
+            p3Hand[i] = deck.cards[i];
+            p3Hand = p3Hand.filter(function (el) {
+                return el != null;
+            });
+        }
+        for (let i = ((deck.cards.length / 2) + (deck.cards.length / 4)); i < deck.cards.length; i++) {
+            p4Hand[i] = deck.cards[i];
+            p4Hand = p4Hand.filter(function (el) {
+                return el != null;
+            });
+        }
+        console.log(p1Hand);
+        console.log(p2Hand);
+        console.log(p3Hand);
+        console.log(p4Hand);
+    }
+}
+
+class Game{
+    constructor(){
+        this.playCount = 0;
+        this.numbOfBooks = 0;
+        this.table = [];
+        this.deck = new Deck();
+        }
+}
+
+class Player{
+    constructor(){
+        this.hand = [];
+        this.books = 0;
+    }
+}
+
+
+    function main(){
+        const newGame = new Game();
+        const Player1 = new Player();
+        const Player2 = new Player();
+        const Player3 = new Player();
+        const Player4 = new Player();
+        Deal(Player1.hand, Player2.hand, Player3.hand, Player4.hand);
+        
+        
+    }    
+    
+    const newGame = new Game();
+    console.log(newGame.deck);   
+    */
