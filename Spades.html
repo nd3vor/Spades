@@ -26,7 +26,7 @@
             class Player {
 	            constructor() {
 	                this.hand = [];
-                    this.books = 0;
+	                this.books = 0;
 	            }
             }
             class Game {
@@ -37,6 +37,7 @@
                     this.deck = new Deck();
                 }
             }
+
             // this is the game function each time we want to play a new game we can call this function.
             function main() {
                 const newGame = new Game();
@@ -47,56 +48,60 @@
                 const Player3 = new Player();
                 const Player4 = new Player();
 
-                console.log(Player1);
             }
             
 
-            function determinePlayer1() {
+            function determinePlayer(playerIndex) {
                 toggleElement('start-screen', false);
                 toggleElement('prepButton', true);
                 toggleElement('playCardButton', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player1.hand;
-                main.currentPlayer = 1;
+		setPlayer(playerIndex);
+	    }
+
+	    function setPlayer(index) {
+	    	setPlayerHand(index);
+	    	setCurrentPlayer(index);
+	    }
+
+	    function setPlayerHand(index) {
+		switch (index) {
+			case 1:
+				main.PlayerHand = main.Player1.hand;
+			break;
+			case 2:
+				main.PlayerHand = main.Player2.hand;
+			break;
+			case 3:
+				main.PlayerHand = main.Player3.hand;
+			break;
+			case 4:
+				main.PlayerHand = main.Player4.hand;
+			break;
+		}
+	    }
+
+	    function setCurrentPlayer(index) {
+	    	main.currentPlayer = index;
+	    }
+
+            function determinePlayer1() {
+	    	setPlayerHand(1)
+	    	setCurrentPlayer(1)
             }
 
             function determinePlayer2() {
-                toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player2.hand;
-                main.currentPlayer = 2;
+	    	setPlayerHand(2)
+	    	setCurrentPlayer(2)
             }
 
             function determinePlayer3() {
-                toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player3.hand;
-                main.currentPlayer = 3;
+	    	setPlayerHand(3)
+	    	setCurrentPlayer(3)
             }
 
             function determinePlayer4() {
-                toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player4.hand;
-                main.currentPlayer = 4;
+	    	setPlayerHand(4)
+	    	setCurrentPlayer(4)
             }
 
             class Deck {
