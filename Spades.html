@@ -10,9 +10,10 @@
                 localStorage.clear();
             };
             
-            window.onload = () => {
-                main();
-            };
+            // window.onload = () => {
+            //     main();
+            // };
+            document.getElementById("start-game").addEventListener("click", main);
             document.getElementById("prepButton").addEventListener("click", Shuffle);
             document.getElementById("determinePlayer1").addEventListener("click", determinePlayer1);
             document.getElementById("determinePlayer2").addEventListener("click", determinePlayer2);
@@ -38,7 +39,21 @@
                 }
             }
             // this is the game function each time we want to play a new game we can call this function.
+               /* Main Function Layout
+                    Declare Variables for arguments
+                    Num of players and hands
+                    Shuffle
+                    Deal
+                    PlayCard
+                    Compare Values
+                    Take Book
+                    
+                */
+
             function main() {
+                toggleElement('main-menu', false);
+                toggleElement('start-screen', true);
+
                 const newGame = new Game();
                 let playerHand = [];
                 let currentPlayer = 0;
@@ -53,20 +68,19 @@
 
             function determinePlayer1() {
                 toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('play-screen', true);
                 main.Player1 = new Player();
                 main.Player2 = new Player();
                 main.Player3 = new Player();
                 main.Player4 = new Player();
+
                 main.playerHand = main.Player1.hand;
                 main.currentPlayer = 1;
             }
 
             function determinePlayer2() {
                 toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('play-screen', true);
                 main.Player1 = new Player();
                 main.Player2 = new Player();
                 main.Player3 = new Player();
@@ -77,8 +91,7 @@
 
             function determinePlayer3() {
                 toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('play-screen', true);
                 main.Player1 = new Player();
                 main.Player2 = new Player();
                 main.Player3 = new Player();
@@ -89,8 +102,7 @@
 
             function determinePlayer4() {
                 toggleElement('start-screen', false);
-                toggleElement('prepButton', true);
-                toggleElement('playCardButton', true);
+                toggleElement('play-screen', true);
                 main.Player1 = new Player();
                 main.Player2 = new Player();
                 main.Player3 = new Player();
@@ -370,17 +382,6 @@
             }
             //player object takes the hand array as a default argument and books will be incremented on takebook call.
             
-                /* Main Function Layout
-                    Declare Variables for arguments
-                    Num of players and hands
-                    Shuffle
-                    Deal
-                    PlayCard
-                    Compare Values
-                    Take Book
-                    
-                */
-            
 
             //----------------------------------------------------------------------------------------------------------
 
@@ -407,14 +408,19 @@
         </script>
     </head>
     <body id="paste">
-        <div id="start-screen" class="screen" style="display:block">
+        <div id="main-menu" class="screen" style="display:block">
+            <button id="start-game">Start Game</button>
+        </div>
+        <div id="start-screen" class="screen" style="display:none">
             <button id="determinePlayer1">Player 1</button>
             <button id="determinePlayer2">Player 2</button>
             <button id="determinePlayer3">Player 3</button>
             <button id="determinePlayer4">Player 4</button>
         </div>
-        <button id="prepButton" style="display:none">Shuffle/Deal</button>
-        <button id="playCardButton" style="display:none">Play Card</button>
+        <div id="play-screen" class="screen" style="display:none">
+            <button id="prepButton">Shuffle/Deal</button>
+            <button id="playCardButton">Play Card</button>
+        </div>
     </body>
 </html>
 
