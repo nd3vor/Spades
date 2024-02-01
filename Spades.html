@@ -27,7 +27,7 @@
             class Player {
 	            constructor() {
 	                this.hand = [];
-                    this.books = 0;
+	                this.books = 0;
 	            }
             }
             class Game {
@@ -38,6 +38,7 @@
                     this.deck = new Deck();
                 }
             }
+
             // this is the game function each time we want to play a new game we can call this function.
                /* Main Function Layout
                     Declare Variables for arguments
@@ -62,11 +63,10 @@
                 const Player3 = new Player();
                 const Player4 = new Player();
 
-                console.log(Player1);
             }
             
 
-            function determinePlayer1() {
+            function determinePlayer(playerIndex) {
                 toggleElement('start-screen', false);
                 toggleElement('play-screen', true);
                 main.Player1 = new Player();
