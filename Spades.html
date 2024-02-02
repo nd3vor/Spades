@@ -1,5 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+    <body id="paste">
+        <div id="main-menu" class="screen" style="display:block">
+            <button id="start-game">Start Game</button>
+        </div>
+        <div id="start-screen" class="screen" style="display:none">
+            <button id="determinePlayer1">Player 1</button>
+            <button id="determinePlayer2">Player 2</button>
+            <button id="determinePlayer3">Player 3</button>
+            <button id="determinePlayer4">Player 4</button>
+        </div>
+        <div id="play-screen" class="screen" style="display:none">
+            <button id="prepButton">Shuffle/Deal</button>
+            <button id="playCardButton">Play Card</button>
+        </div>
+    </body>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,19 +25,139 @@
                 localStorage.clear();
             };
             
-            // window.onload = () => {
-            //     main();
-            // };
             document.getElementById("start-game").addEventListener("click", main);
-            document.getElementById("prepButton").addEventListener("click", Shuffle);
-            document.getElementById("determinePlayer1").addEventListener("click", determinePlayer1);
-            document.getElementById("determinePlayer2").addEventListener("click", determinePlayer2);
-            document.getElementById("determinePlayer3").addEventListener("click", determinePlayer3);
-            document.getElementById("determinePlayer4").addEventListener("click", determinePlayer4);
-            document.getElementById("playCardButton").addEventListener("click", currentPlayerTurn);
+            
+            
+            
 
             const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
             const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
+
+
+
+        //     function determinePlayer(playerIndex) {
+        //         toggleElement('start-screen', false);
+        //         toggleElement('prepButton', true);
+        //         toggleElement('playCardButton', true);
+		// setPlayer(playerIndex);
+	    // }
+
+	    // function setPlayer(index) {
+	    // 	setPlayerHand(index);
+	    // 	setCurrentPlayer(index);
+	    // }
+
+	    // function setPlayerHand(index) {
+		// switch (index) {
+		// 	case 1:
+		// 		main.PlayerHand = main.Player1.hand;
+		// 	break;
+		// 	case 2:
+		// 		main.PlayerHand = main.Player2.hand;
+		// 	break;
+		// 	case 3:
+		// 		main.PlayerHand = main.Player3.hand;
+		// 	break;
+		// 	case 4:
+		// 		main.PlayerHand = main.Player4.hand;
+		// 	break;
+		// }
+	    // }
+
+	    // function setCurrentPlayer(index) {
+	    // 	main.currentPlayer = index;
+	    // }
+
+        //     function determinePlayer1() {
+	    // 	setPlayerHand(1)
+	    // 	setCurrentPlayer(1)
+        //     }
+
+        //     function determinePlayer2() {
+	    // 	setPlayerHand(2)
+	    // 	setCurrentPlayer(2)
+        //     }
+
+        //     function determinePlayer3() {
+	    // 	setPlayerHand(3)
+	    // 	setCurrentPlayer(3)
+        //     }
+
+        //     function determinePlayer4() {
+	    // 	setPlayerHand(4)
+	    // 	setCurrentPlayer(4)
+        //     }
+
+            // this is the game function each time we want to play a new game we can call this function.
+               /* Main Function Layout
+                    Declare Variables for arguments
+                    Num of players and hands
+                    Shuffle
+                    Deal
+                    PlayCard
+                    Compare Values
+                    Take Book
+                    
+                */
+
+            
+
+            // function determinePlayer2(playerIndex) {
+            //     toggleElement('start-screen', false);
+            //     toggleElement('play-screen', true);
+            //     // main.Player1 = new Player();
+            //     // main.Player2 = new Player();
+            //     // main.Player3 = new Player();
+            //     // main.Player4 = new Player();
+            //     main.playerHand = playerIndex.hand;
+            //     main.currentPlayer = 2;
+            // }
+
+            // function determinePlayer3(playerIndex) {
+            //     toggleElement('start-screen', false);
+            //     toggleElement('play-screen', true);
+            //     // main.Player1 = new Player();
+            //     // main.Player2 = new Player();
+            //     // main.Player3 = new Player();
+            //     // main.Player4 = new Player();
+            //     main.playerHand = playerIndex.hand;
+            //     main.currentPlayer = 3;
+            // }
+
+            // function determinePlayer4(playerIndex) {
+            //     toggleElement('start-screen', false);
+            //     toggleElement('play-screen', true);
+            //     // main.Player1 = new Player();
+            //     // main.Player2 = new Player();
+            //     // main.Player3 = new Player();
+            //     // main.Player4 = new Player();
+            //     main.playerHand = playerIndex.hand;
+            //     main.currentPlayer = 4;
+            // }
+
+            function main() {
+                toggleElement('main-menu', false);
+                toggleElement('start-screen', true);
+
+                const newGame = new Game();
+                let playerHand = [];
+                let currentPlayer = 0;
+                const Player1 = new Player();
+                const Player2 = new Player();
+                const Player3 = new Player();
+                const Player4 = new Player();
+
+
+                // CURRENT STATE: EVENTLISTENERS ARE REGISTERING AND RUNNING IMMEDIATELY, NEEDS TO RUN ON THEIR BUTTON'S CLICK
+                document.getElementById("determinePlayer1").addEventListener('click', determinePlayer1(Player1));
+                document.getElementById("prepButton").addEventListener('click', Shuffle(newGame));
+
+                // document.getElementById("determinePlayer2").addEventListener("click", determinePlayer2(Player2));
+                // document.getElementById("determinePlayer3").addEventListener("click", determinePlayer3(Player3));
+                // document.getElementById("determinePlayer4").addEventListener("click", determinePlayer4(Player4));
+                document.getElementById("playCardButton").addEventListener("click", currentPlayerTurn);
+                
+            }
 
             class Player {
 	            constructor() {
@@ -38,77 +173,17 @@
                     this.deck = new Deck();
                 }
             }
-
-            // this is the game function each time we want to play a new game we can call this function.
-               /* Main Function Layout
-                    Declare Variables for arguments
-                    Num of players and hands
-                    Shuffle
-                    Deal
-                    PlayCard
-                    Compare Values
-                    Take Book
-                    
-                */
-
-            function main() {
-                toggleElement('main-menu', false);
-                toggleElement('start-screen', true);
-
-                const newGame = new Game();
-                let playerHand = [];
-                let currentPlayer = 0;
-                const Player1 = new Player();
-                const Player2 = new Player();
-                const Player3 = new Player();
-                const Player4 = new Player();
-
-            }
             
 
-            function determinePlayer(playerIndex) {
+            function determinePlayer1(playerIndex) {
                 toggleElement('start-screen', false);
                 toggleElement('play-screen', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-
-                main.playerHand = main.Player1.hand;
+                // main.Player1 = new Player();
+                // main.Player2 = new Player();
+                // main.Player3 = new Player();
+                // main.Player4 = new Player();
+                main.playerHand = playerIndex.hand;
                 main.currentPlayer = 1;
-            }
-
-            function determinePlayer2() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player2.hand;
-                main.currentPlayer = 2;
-            }
-
-            function determinePlayer3() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player3.hand;
-                main.currentPlayer = 3;
-            }
-
-            function determinePlayer4() {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
-                main.Player1 = new Player();
-                main.Player2 = new Player();
-                main.Player3 = new Player();
-                main.Player4 = new Player();
-                main.playerHand = main.Player4.hand;
-                main.currentPlayer = 4;
             }
 
             class Deck {
@@ -134,40 +209,40 @@
 
             //const deck = new Deck();
 
-            function Shuffle(deck) {
+            function Shuffle(newGame) {
                 //Rearrange order of the cards (Random)
                 //Rearrange order of entire deck, not suit by suit
 
-                main.newGame = new Game();
-                for (let i = main.newGame.deck.cards.length - 1; i > 0; i--) {
+                // main.newGame = new Game();
+                for (let i = newGame.deck.cards.length - 1; i > 0; i--) {
                     const j = Math.floor(Math.random() * (i + 1));
-                    const X = main.newGame.deck.cards[i];
-                    main.newGame.deck.cards[i] = main.newGame.deck.cards[j];
-                    main.newGame.deck.cards[j] = X;
+                    const X = newGame.deck.cards[i];
+                    newGame.deck.cards[i] = newGame.deck.cards[j];
+                    newGame.deck.cards[j] = X;
                 }
-                console.log(main.newGame.deck);
-                Deal();
+                console.log(newGame.deck);
+                //Deal(newGame.deck);
             }
 
             //Dealer distributes a deck of cards to 4 players
-            function Deal() {              
-                for (let i = 0; i < main.newGame.deck.cards.length / 4; i++) {
-                    main.Player1.hand[i] = main.newGame.deck.cards[i];
+            function Deal(deck) {              
+                for (let i = 0; i < deck.cards.length / 4; i++) {
+                    main.Player1.hand[i] = deck.cards[i];
                 }
-                for (let i = main.newGame.deck.cards.length / 4; i < main.newGame.deck.cards.length / 2; i++) {
-                    main.Player2.hand[i] = main.newGame.deck.cards[i];
+                for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
+                    main.Player2.hand[i] = deck.cards[i];
                     main.Player2.hand = main.Player2.hand.filter(function (el) {
                         return el != null;
                     });
                 }
-                for (let i = main.newGame.deck.cards.length / 2; i < ((main.newGame.deck.cards.length / 2) + (main.newGame.deck.cards.length / 4)); i++) {
-                    main.Player3.hand[i] = main.newGame.deck.cards[i];
+                for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
+                    main.Player3.hand[i] = newGame.deck.cards[i];
                     main.Player3.hand = main.Player3.hand.filter(function (el) {
                         return el != null;
                     });
                 }
-                for (let i = ((main.newGame.deck.cards.length / 2) + (main.newGame.deck.cards.length / 4)); i < main.newGame.deck.cards.length; i++) {
-                    main.Player4.hand[i] = main.newGame.deck.cards[i];
+                for (let i = ((deck.cards.length / 2) + (deck.cards.length / 4)); i < deck.cards.length; i++) {
+                    main.Player4.hand[i] = deck.cards[i];
                     main.Player4.hand = main.Player4.hand.filter(function (el) {
                         return el != null;
                     });
@@ -210,7 +285,8 @@
             //---------------------------------------------------------------------------------------------------------
             //THIS FUNCTION WILL BE THE PICKING A CARD FUNCTION
 
-            function currentPlayerTurn() {
+            function currentPlayerTurn(index) {
+                console.log("currentPlayerTurn");
                 console.log(`Player ${main.currentPlayer}'s Turn`);
                 if (main.currentPlayer === 1) {
                     main.playerHand = main.Player1.hand;
@@ -407,21 +483,6 @@
 
         </script>
     </head>
-    <body id="paste">
-        <div id="main-menu" class="screen" style="display:block">
-            <button id="start-game">Start Game</button>
-        </div>
-        <div id="start-screen" class="screen" style="display:none">
-            <button id="determinePlayer1">Player 1</button>
-            <button id="determinePlayer2">Player 2</button>
-            <button id="determinePlayer3">Player 3</button>
-            <button id="determinePlayer4">Player 4</button>
-        </div>
-        <div id="play-screen" class="screen" style="display:none">
-            <button id="prepButton">Shuffle/Deal</button>
-            <button id="playCardButton">Play Card</button>
-        </div>
-    </body>
 </html>
 
 <!-- /* Main Function Layout
