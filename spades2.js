@@ -34,19 +34,19 @@ class Deck {
         }
         console.log(deck);
     }
-    
-    Deal(deck, p1Hand, p2Hand, p3Hand, p4Hand) {              
-        for(let i = 0; i < 13; i++){
-            p1Hand[i] = deck.cards.shift();
-            p2Hand[i] = deck.cards.shift();
-            p3Hand[i] = deck.cards.shift();
-            p4Hand[i] = deck.cards.shift();
-        }
-        console.log(p1Hand);
-        console.log(p2Hand);
-        console.log(p3Hand);
-        console.log(p4Hand);
+}
+
+function Deal(deck, p1Hand, p2Hand, p3Hand, p4Hand) {              
+    for(let i = 0; i < 13; i++){
+        p1Hand[i] = deck.cards.shift();
+        p2Hand[i] = deck.cards.shift();
+        p3Hand[i] = deck.cards.shift();
+        p4Hand[i] = deck.cards.shift();
     }
+    console.log(p1Hand);
+    console.log(p2Hand);
+    console.log(p3Hand);
+    console.log(p4Hand);
 }
 
 class Player{
@@ -114,22 +114,22 @@ class Game{
         }
     
     setStartingPlayer(startingIndex) {
-        index = startingIndex 
+        index = startingIndex; 
         for (i = 0; i < 4; i++) {
-            index = (index + 1) % 4
+            index = (index + 1) % 4;
         }
     
     }
-    getHighScoreIndex(playerScores){
-        let highScoreIndex = 0;
-        for (let i = 1; i < playerScores.length; i++) {
-            if (playerScores[i] > playerScores[highScoreIndex]) {
-                highScoreIndex = i;
-            }
-        }
-        return highScoreIndex;
-    }
+}
 
+function getHighScoreIndex(cardArray){
+    let highScoreIndex = 0;
+    for (let i = 1; i < cardArray.length; i++) {
+        if (cardArray[i] > cardArray[highScoreIndex]) {
+            highScoreIndex = i;
+        }
+    }
+    return highScoreIndex;
 }
 
 /* Main Function Layout
@@ -153,22 +153,19 @@ function play(game, Player1, Player2 , Player3, Player4 ){
 
 
     function main(){
-        const newGame = new Game();
         const Player1 = new Player();
         const Player2 = new Player();
         const Player3 = new Player();
         const Player4 = new Player();
+
+        const newGame = new Game();
         newGame.deck.Shuffle(newGame.deck);
-        newGame.deck.Deal(Player1.hand, Player2.hand, Player3.hand, Player4.hand);
-        Player1.playCard(Player1.hand, newGame.table);
-        Player2.playCard(Player2.hand, newGame.table);
-        Player3.playCard(Player3.hand, newGame.table);
-        Player4.playCard(Player4.hand, newGame.table);
-        getHighScoreIndex(newGame.table);
+        Deal(newGame.deck, Player1.hand, Player2.hand, Player3.hand, Player4.hand);
+        console.log(Player1.hand);
 
         
         
     }    
     
-    const newGame = new Game();
-    console.log(newGame.deck);
+    //const newGame = new Game();
+    main();
