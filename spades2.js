@@ -1,6 +1,3 @@
-
-
-
 const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
 const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
 
@@ -160,15 +157,13 @@ function play(game, Player1, Player2 , Player3, Player4 ){
         const Player4 = new Player();
         newGame.deck.Shuffle(newGame.deck);
         newGame.deck.Deal(Player1.hand, Player2.hand, Player3.hand, Player4.hand);
-        Player1.playCard(Player1.hand, newGame.table);
-        Player2.playCard(Player2.hand, newGame.table);
-        Player3.playCard(Player3.hand, newGame.table);
-        Player4.playCard(Player4.hand, newGame.table);
-        getHighScoreIndex(newGame.table);
+        play()
+        // Player1.playCard(Player1.hand, newGame.table);
+        // Player2.playCard(Player2.hand, newGame.table);
+        // Player3.playCard(Player3.hand, newGame.table);
+        // Player4.playCard(Player4.hand, newGame.table);
+        // getHighScoreIndex(newGame.table);
 
         
         
     }    
-    
-    const newGame = new Game();
-    console.log(newGame.deck);

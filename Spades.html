@@ -11,7 +11,6 @@
             <button id="determinePlayer4">Player 4</button>
         </div>
         <div id="play-screen" class="screen" style="display:none">
-            <button id="prepButton">Shuffle/Deal</button>
             <button id="playCardButton">Play Card</button>
         </div>
     </body>
@@ -26,171 +25,9 @@
             };
             
             document.getElementById("start-game").addEventListener("click", main);
-            
-            
-            
 
             const suits = ["Diamonds", "Hearts", "Spades", "Clubs"];
             const values = ["2", "3", "4", "5", "6", "7", "8", "9", "0A", "0B", "0C", "0D", "0E"];
-
-
-
-        //     function determinePlayer(playerIndex) {
-        //         toggleElement('start-screen', false);
-        //         toggleElement('prepButton', true);
-        //         toggleElement('playCardButton', true);
-		// setPlayer(playerIndex);
-	    // }
-
-	    // function setPlayer(index) {
-	    // 	setPlayerHand(index);
-	    // 	setCurrentPlayer(index);
-	    // }
-
-	    // function setPlayerHand(index) {
-		// switch (index) {
-		// 	case 1:
-		// 		main.PlayerHand = main.Player1.hand;
-		// 	break;
-		// 	case 2:
-		// 		main.PlayerHand = main.Player2.hand;
-		// 	break;
-		// 	case 3:
-		// 		main.PlayerHand = main.Player3.hand;
-		// 	break;
-		// 	case 4:
-		// 		main.PlayerHand = main.Player4.hand;
-		// 	break;
-		// }
-	    // }
-
-	    // function setCurrentPlayer(index) {
-	    // 	main.currentPlayer = index;
-	    // }
-
-        //     function determinePlayer1() {
-	    // 	setPlayerHand(1)
-	    // 	setCurrentPlayer(1)
-        //     }
-
-        //     function determinePlayer2() {
-	    // 	setPlayerHand(2)
-	    // 	setCurrentPlayer(2)
-        //     }
-
-        //     function determinePlayer3() {
-	    // 	setPlayerHand(3)
-	    // 	setCurrentPlayer(3)
-        //     }
-
-        //     function determinePlayer4() {
-	    // 	setPlayerHand(4)
-	    // 	setCurrentPlayer(4)
-        //     }
-
-            // this is the game function each time we want to play a new game we can call this function.
-               /* Main Function Layout
-                    Declare Variables for arguments
-                    Num of players and hands
-                    Shuffle
-                    Deal
-                    PlayCard
-                    Compare Values
-                    Take Book
-                    
-                */
-
-            
-
-            // function determinePlayer2(playerIndex) {
-            //     toggleElement('start-screen', false);
-            //     toggleElement('play-screen', true);
-            //     // main.Player1 = new Player();
-            //     // main.Player2 = new Player();
-            //     // main.Player3 = new Player();
-            //     // main.Player4 = new Player();
-            //     main.playerHand = playerIndex.hand;
-            //     main.currentPlayer = 2;
-            // }
-
-            // function determinePlayer3(playerIndex) {
-            //     toggleElement('start-screen', false);
-            //     toggleElement('play-screen', true);
-            //     // main.Player1 = new Player();
-            //     // main.Player2 = new Player();
-            //     // main.Player3 = new Player();
-            //     // main.Player4 = new Player();
-            //     main.playerHand = playerIndex.hand;
-            //     main.currentPlayer = 3;
-            // }
-
-            // function determinePlayer4(playerIndex) {
-            //     toggleElement('start-screen', false);
-            //     toggleElement('play-screen', true);
-            //     // main.Player1 = new Player();
-            //     // main.Player2 = new Player();
-            //     // main.Player3 = new Player();
-            //     // main.Player4 = new Player();
-            //     main.playerHand = playerIndex.hand;
-            //     main.currentPlayer = 4;
-            // }
-
-            function main() {
-                toggleElement('main-menu', false);
-                toggleElement('start-screen', true);
-
-                const newGame = new Game();
-                let playerHand = [];
-                let currentPlayer = 0;
-                const Player1 = new Player();
-                const Player2 = new Player();
-                const Player3 = new Player();
-                const Player4 = new Player();
-
-
-                // CURRENT STATE: EVENTLISTENERS ARE REGISTERING AND RUNNING IMMEDIATELY, NEEDS TO RUN ON THEIR BUTTON'S CLICK
-                document.getElementById("determinePlayer1").addEventListener('click', determinePlayer1(Player1));
-                document.getElementById("prepButton").addEventListener('click', Shuffle(newGame));
-
-                // document.getElementById("determinePlayer2").addEventListener("click", determinePlayer2(Player2));
-                // document.getElementById("determinePlayer3").addEventListener("click", determinePlayer3(Player3));
-                // document.getElementById("determinePlayer4").addEventListener("click", determinePlayer4(Player4));
-                document.getElementById("playCardButton").addEventListener("click", currentPlayerTurn);
-                
-            }
-
-            class Player {
-	            constructor() {
-	                this.hand = [];
-	                this.books = 0;
-	            }
-            }
-            class Game {
-                constructor() {
-                    this.playCount = 0;
-                    this.numbOfBooks = 0;
-                    this.table = [];
-                    this.deck = new Deck();
-                }
-            }
-            
-
-            function determinePlayer1(playerIndex) {
-                toggleElement('start-screen', false);
-                toggleElement('play-screen', true);
-                // main.Player1 = new Player();
-                // main.Player2 = new Player();
-                // main.Player3 = new Player();
-                // main.Player4 = new Player();
-                main.playerHand = playerIndex.hand;
-                main.currentPlayer = 1;
-            }
-
-            class Deck {
-                constructor(cards = createDeck()) {
-                    this.cards = cards;
-                }
-            }
 
             class Card {
                 constructor(suit, value) {
@@ -198,279 +35,247 @@
                     this.value = value;
                 }
             }
+            class Deck {
+                constructor(cards = this.createDeck()) {
+                    this.cards = cards;
+                }
 
-            function createDeck() {
-                return suits.flatMap(suit => {
-                    return values.map(value => {
+                createDeck() {
+                    return suits.flatMap(suit => {
+                        return values.map(value => {
                         return new Card(suit, value);
-                    });
-                });
-            }
-
-            //const deck = new Deck();
-
-            function Shuffle(newGame) {
-                //Rearrange order of the cards (Random)
-                //Rearrange order of entire deck, not suit by suit
-
-                // main.newGame = new Game();
-                for (let i = newGame.deck.cards.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    const X = newGame.deck.cards[i];
-                    newGame.deck.cards[i] = newGame.deck.cards[j];
-                    newGame.deck.cards[j] = X;
-                }
-                console.log(newGame.deck);
-                //Deal(newGame.deck);
-            }
-
-            //Dealer distributes a deck of cards to 4 players
-            function Deal(deck) {              
-                for (let i = 0; i < deck.cards.length / 4; i++) {
-                    main.Player1.hand[i] = deck.cards[i];
-                }
-                for (let i = deck.cards.length / 4; i < deck.cards.length / 2; i++) {
-                    main.Player2.hand[i] = deck.cards[i];
-                    main.Player2.hand = main.Player2.hand.filter(function (el) {
-                        return el != null;
+                        });
                     });
                 }
-                for (let i = deck.cards.length / 2; i < ((deck.cards.length / 2) + (deck.cards.length / 4)); i++) {
-                    main.Player3.hand[i] = newGame.deck.cards[i];
-                    main.Player3.hand = main.Player3.hand.filter(function (el) {
-                        return el != null;
-                    });
-                }
-                for (let i = ((deck.cards.length / 2) + (deck.cards.length / 4)); i < deck.cards.length; i++) {
-                    main.Player4.hand[i] = deck.cards[i];
-                    main.Player4.hand = main.Player4.hand.filter(function (el) {
-                        return el != null;
-                    });
-                }
-                console.log(main.Player1.hand);
-                console.log(main.Player2.hand);
-                console.log(main.Player3.hand);
-                console.log(main.Player4.hand);
-            }
 
-            //OBJECTIVE OF THIS OUTLINE : Keep all engineers in parallel with the same ideas and objectives----------------------------------------------------------------------------------------------------
-
-            //Value comparisons
-                //Sets - JavaScript
-                    //Uniqueness
-                    //Not Order dependent
-                //Plays a card
-                    //Choose a card from the cards that you have (your "hand": also a set)
-                        //(set = set - 1)
-                    //Place chosen card on the table (container for the set of 4 cards)
-                        //Insert cards played into table set
-                        //Of table set, determine highest card
-                        //Table set becomes book, which belongs to the player that played the highest card
-                //Card needs to be worth more than the other cards (higher value)
-                //When someone has highest valued card, that is called a "book"
-                //"Book" - Take all 4 cards (set of cards) and you played the highest card of them
-                    //Create an ARRAY OF SETS of cards for multiple wins
-                    //Winner has the most sets in the end -- End of game loop (win condition)
-                //Data Structure? Does the code have a method already?
-
-                //Functions
-                    //Shuffle - COMPLETED
-                    //Winners = When the game ends, which player has the most books compared to other players / GUSTAVO
-                    //Playing a card = Selecting a card from the hand of each player and place into table set / DEWAYNE
-                    //Taking a book = Store your books won into an array of books / NATE
-                    //Determine a book = comparing values and determining highest card / PETER
-
-                //When the players each play a card, we can determine the highest value of each card. That only determines the winning card, not the winning player
-
-            //---------------------------------------------------------------------------------------------------------
-            //THIS FUNCTION WILL BE THE PICKING A CARD FUNCTION
-
-            function currentPlayerTurn(index) {
-                console.log("currentPlayerTurn");
-                console.log(`Player ${main.currentPlayer}'s Turn`);
-                if (main.currentPlayer === 1) {
-                    main.playerHand = main.Player1.hand;
-                }
-                else if (main.currentPlayer === 2) {
-                    main.playerHand = main.Player2.hand;
-                }
-                else if (main.currentPlayer === 3) {
-                    main.playerHand = main.Player3.hand;
-                }
-                else if (main.currentPlayer === 4) {
-                    main.playerHand = main.Player4.hand;
-                }
-                createBook(main.newGame.table);
-
-                main.newGame.playCount++;
-
-                // Advance to the next player's turn
-                main.currentPlayer = (main.currentPlayer % 4) + 1;
-
-                return main.playCount;
-            }
-
-            function playCard(playerHand) {
-                // Is the player's hand empty?
-                if (playerHand.size === 0) {
-                    console.log("Out of Cards");
-                    return; // Exit function if no cards are left in the player's hand
-                }
-
-                /* For the demo purposes, display the player's hand in the console
-                so they can view each of the cards index, value, and suit */
-                console.log(`Player ${main.currentPlayer}'s Hand: `);
-                for (let i = 0; i < playerHand.length; i++) {
-                    const card = playerHand[i];
-                    console.log(`${i}: ${card.value} of ${card.suit}`);
-                }
-
-                // Continuosly to prompt the user until valid input is received
-                // We can change this later when a bot is implemented
-                while (true) {
-                    const cardIndexPrompt = prompt(`Player ${main.currentPlayer}, enter the index of the card to play: `);
-                    const cardIndex = parseInt(cardIndexPrompt);
-
-                    if (cardIndex >= 0 && cardIndex < playerHand.length) {
-                        // Remove the card from the player's hand
-                        const cardPlayed = playerHand.splice(cardIndex, 1)[0];
-                        // Add the card played to the book array
-                        main.newGame.table.push(cardPlayed);
-                        // Log the action to the console
-                        console.log(`Player ${main.currentPlayer} played ${cardPlayed.value} of ${cardPlayed.suit}`);
-
-                        break;
+                Shuffle(deck) {
+                    //Rearrange order of the cards (Random)
+                    //Rearrange order of entire deck, not suit by suit
+                    for (let i = deck.cards.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        const X = deck.cards[i];
+                        deck.cards[i] = deck.cards[j];
+                        deck.cards[j] = X;
                     }
-
-                    console.log("Invalid input. Try again.");
+                    console.log(deck);
                 }
-            }
-            
-            function takeBook(index){
-                main.newGame.numbOfBooks++;           
-                switch(index){
-                    case 0:
-                        main.Player1.books = main.Player1.books + 1;
-                        main.newGame.table.splice(0, 4);
-                        break;
-                    case 1:
-                        main.Player2.books = main.Player2.books + 1;
-                        main.newGame.table.splice(0, 4);
-                        break;
-                    case 2:
-                        main.Player3.books = main.Player3.books + 1;
-                        main.newGame.table.splice(0, 4);
-                        break;
-                    case 3:
-                        main.Player4.books = main.Player4.books + 1;
-                        main.newGame.table.splice(0, 4);
-                        break; 
-                }
-                console.log("Player 1's Books: " + main.Player1.books);
-                console.log("Player 2's Books: " + main.Player2.books);
-                console.log("Player 3's Books: " + main.Player3.books);
-                console.log("Player 4's Books: " + main.Player4.books);
-
-                console.log(main.newGame.numbOfBooks);
-                if (main.newGame.numbOfBooks === 13) {
-                    Winners(main.Player1.books, main.Player2.books, main.Player3.books, main.Player4.books);
+    
+                Deal(deck, p1Hand, p2Hand, p3Hand, p4Hand) {              
+                    for(let i = 0; i < 13; i++){
+                        p1Hand[i] = deck.cards.shift();
+                        p2Hand[i] = deck.cards.shift();
+                        p3Hand[i] = deck.cards.shift();
+                        p4Hand[i] = deck.cards.shift();
+                    }
+                    console.log(p1Hand);
+                    console.log(p2Hand);
+                    console.log(p3Hand);
+                    console.log(p4Hand);
                 }
             }
 
-            async function createBook(tableSet /*the set of cards on the table*/) {
-                let highestCard = tableSet[0];
-                let index = 0;
+            class Player{
+                constructor(){
+                    this.hand = [];
+                    this.books = 0;
+                }
 
-                await playCard(main.playerHand);
-
-
-                if (main.newGame.playCount === 4) {
-                    console.log(main.newGame.table);
-                    main.newGame.playCount = 0;
-                    console.log("End of Round");
-
-                    for (let i = 0; i < tableSet.length; i++) {
-                        if (tableSet[i].suit === "Spades") {
-                            tableSet[i].value = tableSet[i].value + 13;
+                playCard(playerHand, table, currentPlayer) {
+                    if (playerHand.length === 0) {
+                        console.log("Out of Cards");
+                        return;
+                    }
+    
+                    console.log(`Player ${currentPlayer}'s Hand:`);
+                    for (let i = 0; i < playerHand.length; i++) {
+                        const card = playerHand[i];
+                        console.log(`${i}: ${card.value} of ${card.suit}`);
+                    }
+    
+                    while (true) {
+                        const cardIndexPrompt = prompt(`Player ${currentPlayer}, enter the index of the card to play: `);
+                        const cardIndex = parseInt(cardIndexPrompt);
+    
+                        if (cardIndex >= 0 && cardIndex < playerHand.length) {
+                            const cardPlayed = playerHand.splice(cardIndex, 1)[0];
+                            table.push(cardPlayed);
+                            console.log(`Player ${currentPlayer} played ${cardPlayed.value} of ${cardPlayed.suit}`);
+                            break;
                         }
-                        if (parseInt(tableSet[i].value, 16) > parseInt(highestCard.value, 16)) {
-                            highestCard = tableSet[i];
-                            index = i;
+    
+                        console.log("Invalid input. Try again.");
+                    }
+                }
+            }
+
+            class Game {
+                constructor(){
+                    this.playBool = false;
+                    this.playCount = 0;
+                    this.table = [];
+                    this.deck = new Deck();
+                    this.Player1 = new Player();
+                    this.Player2 = new Player();
+                    this.Player3 = new Player();
+                    this.Player4 = new Player();
+                }
+    
+                setStartingPlayer(startingIndex) {
+                    index = startingIndex 
+                    for (i = 0; i < 4; i++) {
+                        index = (index + 1) % 4
+                    }
+    
+                }
+
+                getHighScoreIndex(playerScores, numbOfBooks){
+                    let highScoreIndex = 0;
+                    for (let i = 0; i < playerScores.length; i++) {
+                        console.log(parseInt(playerScores[i].value, 16));
+                        if (playerScores[i].suit === "Spades") {
+                            playerScores[i].value = (parseInt(playerScores[i].value, 16) + 13);
+                        }
+                        if (parseInt(playerScores[i].value, 16) > parseInt(playerScores[highScoreIndex].value, 16)) {
+                            highScoreIndex = i;
                         }
                     }
-
-                    takeBook(index);
-                    return index;
+                    console.log(playerScores, highScoreIndex);
+                    playerScores.splice(0, 4);
+                    this.takeBook(highScoreIndex, numbOfBooks, this.Player1, this.Player2, this.Player3, this.Player4);
+                    return highScoreIndex;
                 }
+
+                takeBook(index, numbOfBooks, Player1, Player2, Player3, Player4){
+                               
+                    switch(index){
+                        case 0:
+                            Player1.books = Player1.books + 1;
+                            break;
+                        case 1:
+                            Player2.books = Player2.books + 1;                        
+                            break;
+                        case 2:
+                            Player3.books = Player3.books + 1;
+                            break;
+                        case 3:
+                            Player4.books = Player4.books + 1;
+                            break; 
+                    }
+                    if (numbOfBooks === 13) {
+                        // let playerBooks = [Player1.books, Player2.books, Player3.books, Player4.books];
+                        this.Winners(Player1.books, Player2.books, Player3.books, Player4.books);
+                    }
+                    console.log(Player1.books, Player2.books, Player3.books, Player4.books);
+                    console.log(numbOfBooks);
+
+                    return numbOfBooks;
+                }
+
+                Winners(p1Score, p2Score, p3Score, p4Score) {
+
+                    let scores = [];
+                    let winners = [];
+                    let highScore = 0;
+                    let playerScores = "";
+                    let winningMessage = "";
+
+                    scores.push(p1Score,p2Score,p3Score,p4Score);
+
+                    highScore = this.getHighScore(scores);
+
+                    for(let i = 0; i < scores.length; i++){
+                        if(highScore == scores[i]){
+                            winners.push(`Player${i+1}`);	
+                        }
+                    }
+                    for(let i = 0; i < 4; i++){
+                        playerScores += `Player${i+1} Score: ${scores[i]} \n`;	
+                    }
+
+                    winningMessage += playerScores;
+
+                    if(winners.length < 2)
+                        winningMessage += "The winnner is " + winners[0];	
+                    else{
+                        winningMessage += "It's a tie! The winners are";
+                        for(let i = 0; i<winners.length; i++) {
+                            winningMessage += " " + winners[i];
+                        }
+                    }
+                    winningMessage += "!";
+                    console.log(winningMessage);
+                    return winningMessage;
+                } 
+
+                Compare(num1, num2) {
+                    if(num1 > num2)
+                        return num1;
+                    else
+                        return num2;
+                }
+
+                getHighScore(playerScores){
+                    let highScore = this.Compare(playerScores[0],playerScores[1]); 
+
+                    for(let i = 1; i < playerScores.length; i++){
+                        highScore = this.Compare(highScore,playerScores[i]) 
+                    }
+                    return highScore;
+                }
+            }
+
+/* Main Function Layout
+encapsulate variables
+Declare Variables for arguments
+Num of players and hands
+Shuffle
+Deal
+PlayCard
+Compare Values
+Take Book       
+*/
+//still testing this idea
+            function play(game, Player1, Player2 , Player3, Player4){
+                Player1.playCard(Player1.hand, game.table);
+                Player2.playCard(Player2.hand, game.table);
+                Player3.playCard(Player3.hand, game.table);
+                Player4.playCard(Player4.hand, game.table);
+                getHighScoreIndex(game.table);
+            }
+
+
+            function main(){
+                toggleElement("main-menu", false);
+                toggleElement("play-screen", true);
                 
-            }
+                const newGame = new Game();
+                let currentPlayer = 1;
+                let numbOfBooks = 0;
 
-            function Winners(p1Score, p2Score, p3Score, p4Score){
+                newGame.deck.Shuffle(newGame.deck);
+                newGame.deck.Deal(newGame.deck, newGame.Player1.hand, newGame.Player2.hand, newGame.Player3.hand, newGame.Player4.hand);
+                console.log(newGame.deck);
 
-                let scores = [];
-                let winners = [];
-                let highScore = 0;
-                let playerScores = "";
-                let winningMessage = "";
-
-                scores.push(p1Score,p2Score,p3Score,p4Score);
-
-                highScore = getHighScore(scores);
-
-                for(let i = 0; i < scores.length; i++){
-                    if(highScore == scores[i]){
-                        winners.push(`Player${i+1}`);	
+                document.getElementById("playCardButton").addEventListener("click", function () {
+                    switch (currentPlayer) {
+                    case 1:
+                        newGame.Player1.playCard(newGame.Player1.hand, newGame.table, currentPlayer);    
+                        currentPlayer = (currentPlayer % 4) + 1;
+                    case 2:
+                        newGame.Player2.playCard(newGame.Player2.hand, newGame.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
+                    case 3:
+                        newGame.Player3.playCard(newGame.Player3.hand, newGame.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
+                    case 4:
+                        newGame.Player4.playCard(newGame.Player4.hand, newGame.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
                     }
-                }
-                for(let i = 0; i < 4; i++){
-                    playerScores += `Player${i+1} Score: ${scores[i]} \n`;	
-                }
-
-                winningMessage += playerScores;
-
-                if(winners.length < 2)
-                    winningMessage += "The winnner is " + winners[0];	
-                else{
-                    winningMessage += "It's a tie! The winners are";
-                    for(i = 0; i < winners.length; i++) {
-                        winningMessage += " " + winners[i];
-                    }
-                }
-                winningMessage += "!";
-                console.log(winningMessage);
-                return winningMessage;
-            } 
-
-            function Compare(num1, num2){
-                if(num1 > num2)
-                    return num1;
-                else
-                    return num2;
-            }
-
-            function getHighScore(playerScores){
-                let highScore = Compare(playerScores[0],playerScores[1]); 
-
-                for(let i = 1; i < playerScores.length; i++){
-                    highScore = Compare(highScore,playerScores[i]) 
-                }
-                return highScore;
-            }
-            //player object takes the hand array as a default argument and books will be incremented on takebook call.
-            
-
-            //----------------------------------------------------------------------------------------------------------
-
-                //Data Structures
-                    //Sets
-                        //BOOK - Set of 4 Cards
-                        //HAND - Set of card in hand (13 cards)
-                        //TABLE - Set of cards that each player played from their hand
-                    //Arrays
-                    //"Play"
-                        //Remove card from HAND set and play onto TABLE set
-
-            //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    numbOfBooks++;
+                    newGame.getHighScoreIndex(newGame.table, numbOfBooks);
+                    
+                });
+            }    
         
             //Can only play same suit as lead card + conditions
 
