@@ -161,8 +161,7 @@ function play(game, Player1, Player2 , Player3, Player4 ){
         const newGame = new Game();
         newGame.deck.Shuffle(newGame.deck);
         Deal(newGame.deck, Player1.hand, Player2.hand, Player3.hand, Player4.hand);
-        play();
-        console.log(Player1.hand);
+        //play();
 
         
         
