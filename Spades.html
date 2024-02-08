@@ -48,6 +48,14 @@
                     });
                 }
 
+                AugmentSpadeValues(deck) {
+                    for (let i = 0; i < deck.cards.length; i++) {
+                        if (deck.cards[i].suit === "Spades") {
+                            deck.cards[i].value = (parseInt(deck.cards[i].value, 16) + 13);
+                        }
+                    }
+                }
+
                 Shuffle(deck) {
                     //Rearrange order of the cards (Random)
                     //Rearrange order of entire deck, not suit by suit
@@ -57,7 +65,7 @@
                         deck.cards[i] = deck.cards[j];
                         deck.cards[j] = X;
                     }
-                    console.log(deck);
+                    //console.log(deck);
                 }
     
                 Deal(deck, p1Hand, p2Hand, p3Hand, p4Hand) {              
@@ -129,20 +137,15 @@
     
                 }
 
-                getHighScoreIndex(playerScores, numbOfBooks){
+                getHighScoreIndex(playerScores){
                     let highScoreIndex = 0;
                     for (let i = 0; i < playerScores.length; i++) {
-                        console.log(parseInt(playerScores[i].value, 16));
-                        if (playerScores[i].suit === "Spades") {
-                            playerScores[i].value = (parseInt(playerScores[i].value, 16) + 13);
-                        }
                         if (parseInt(playerScores[i].value, 16) > parseInt(playerScores[highScoreIndex].value, 16)) {
                             highScoreIndex = i;
                         }
                     }
                     console.log(playerScores, highScoreIndex);
                     playerScores.splice(0, 4);
-                    this.takeBook(highScoreIndex, numbOfBooks, this.playerBooks);
                     return highScoreIndex;
                 }
 
@@ -162,35 +165,30 @@
                             playerBooks[3]++;
                             break; 
                     }
-                    if (numbOfBooks === 13) {
-                        // let playerBooks = [Player1.books, Player2.books, Player3.books, Player4.books];
-                        this.Winners(Player1.books, Player2.books, Player3.books, Player4.books);
-                    }
-                    console.log(Player1.books, Player2.books, Player3.books, Player4.books);
-                    console.log(numbOfBooks);
 
+                    if (numbOfBooks === 3) {
+                        this.Winners(playerBooks);
+                    }
+                    console.log(playerBooks);
+                    
                     return numbOfBooks;
                 }
 
-                Winners(p1Score, p2Score, p3Score, p4Score) {
-
-                    let scores = [];
+                Winners(playerBooks) {
                     let winners = [];
                     let highScore = 0;
                     let playerScores = "";
                     let winningMessage = "";
 
-                    scores.push(p1Score,p2Score,p3Score,p4Score);
+                    highScore = this.getHighScore(playerBooks);
 
-                    highScore = this.getHighScore(scores);
-
-                    for(let i = 0; i < scores.length; i++){
-                        if(highScore == scores[i]){
+                    for(let i = 0; i < playerBooks.length; i++){
+                        if(highScore == playerBooks[i]){
                             winners.push(`Player${i+1}`);	
                         }
                     }
                     for(let i = 0; i < 4; i++){
-                        playerScores += `Player${i+1} Score: ${scores[i]} \n`;	
+                        playerScores += `Player${i+1} Score: ${playerBooks[i]} \n`;	
                     }
 
                     winningMessage += playerScores;
@@ -199,7 +197,7 @@
                         winningMessage += "The winnner is " + winners[0];	
                     else{
                         winningMessage += "It's a tie! The winners are";
-                        for(let i = 0; i<winners.length; i++) {
+                        for(let i = 0; i < winners.length; i++) {
                             winningMessage += " " + winners[i];
                         }
                     }
@@ -215,11 +213,11 @@
                         return num2;
                 }
 
-                getHighScore(playerScores){
-                    let highScore = this.Compare(playerScores[0],playerScores[1]); 
+                getHighScore(playerBooks) {
+                    let highScore = this.Compare(playerBooks[0], playerBooks[1]);
 
-                    for(let i = 1; i < playerScores.length; i++){
-                        highScore = this.Compare(highScore, playerScores[i]) 
+                    for(let i = 1; i < playerBooks.length; i++){
+                        highScore = this.Compare(highScore, playerBooks[i]) 
                     }
                     return highScore;
                 }
@@ -236,16 +234,30 @@ Compare Values
 Take Book       
 */
 //still testing this idea
-            function play(game, Player1, Player2 , Player3, Player4){
-                Player1.playCard(Player1.hand, game.table);
-                Player2.playCard(Player2.hand, game.table);
-                Player3.playCard(Player3.hand, game.table);
-                Player4.playCard(Player4.hand, game.table);
-                getHighScoreIndex(game.table);
+
+//Look into using table function index to determine who's turn it is/who goes first in the game
+
+            function play(game, Player1, Player2 , Player3, Player4, numbOfBooks, currentPlayer){
+                switch (currentPlayer) {
+                    case 1:
+                        Player1.playCard(Player1.hand, game.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
+                    case 2:
+                        Player2.playCard(Player2.hand, game.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
+                    case 3:
+                        Player3.playCard(Player3.hand, game.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
+                    case 4:
+                        Player4.playCard(Player4.hand, game.table, currentPlayer);
+                        currentPlayer = (currentPlayer % 4) + 1;
+                }
+                let index = game.getHighScoreIndex(game.table);
+                game.takeBook(index, numbOfBooks, game.playerBooks);
             }
 
 
-            function main(){
+            function main() {
                 toggleElement("main-menu", false);
                 toggleElement("play-screen", true);
                 
@@ -253,28 +265,14 @@ Take Book
                 let currentPlayer = 1;
                 let numbOfBooks = 0;
 
+                newGame.deck.AugmentSpadeValues(newGame.deck);
                 newGame.deck.Shuffle(newGame.deck);
                 newGame.deck.Deal(newGame.deck, newGame.Player1.hand, newGame.Player2.hand, newGame.Player3.hand, newGame.Player4.hand);
                 console.log(newGame.deck);
 
                 document.getElementById("playCardButton").addEventListener("click", function () {
-                    switch (currentPlayer) {
-                    case 1:
-                        newGame.Player1.playCard(newGame.Player1.hand, newGame.table, currentPlayer);    
-                        currentPlayer = (currentPlayer % 4) + 1;
-                    case 2:
-                        newGame.Player2.playCard(newGame.Player2.hand, newGame.table, currentPlayer);
-                        currentPlayer = (currentPlayer % 4) + 1;
-                    case 3:
-                        newGame.Player3.playCard(newGame.Player3.hand, newGame.table, currentPlayer);
-                        currentPlayer = (currentPlayer % 4) + 1;
-                    case 4:
-                        newGame.Player4.playCard(newGame.Player4.hand, newGame.table, currentPlayer);
-                        currentPlayer = (currentPlayer % 4) + 1;
-                    }
                     numbOfBooks++;
-                    newGame.getHighScoreIndex(newGame.table, numbOfBooks);
-                    
+                    play(newGame, newGame.Player1, newGame.Player2, newGame.Player3, newGame.Player4, numbOfBooks, currentPlayer);     
                 });
             }    
         
