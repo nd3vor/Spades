@@ -130,14 +130,13 @@
                 }
     
                 setStartingPlayer(startingIndex) {
-                    index = startingIndex 
+                    index = startingIndex;
                     for (i = 0; i < 4; i++) {
-                        index = (index + 1) % 4
+                        index = (index + 1) % 4;
                     }
-    
                 }
 
-                getHighScoreIndex(playerScores){
+                getHighScoreIndex(playerScores) {
                     let highScoreIndex = 0;
                     for (let i = 0; i < playerScores.length; i++) {
                         if (parseInt(playerScores[i].value, 16) > parseInt(playerScores[highScoreIndex].value, 16)) {
@@ -149,7 +148,7 @@
                     return highScoreIndex;
                 }
 
-                takeBook(index, numbOfBooks, playerBooks){
+                takeBook(index, numbOfBooks, playerBooks) {
                                
                     switch(index){
                         case 0:
@@ -237,7 +236,7 @@ Take Book
 
 //Look into using table function index to determine who's turn it is/who goes first in the game
 
-            function play(game, Player1, Player2 , Player3, Player4, numbOfBooks, currentPlayer){
+            function play(game, Player1, Player2 , Player3, Player4, numbOfBooks, currentPlayer) {
                 switch (currentPlayer) {
                     case 1:
                         Player1.playCard(Player1.hand, game.table, currentPlayer);
